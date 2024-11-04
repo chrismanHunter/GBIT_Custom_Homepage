@@ -49,6 +49,19 @@
             font-size: 16px;
             cursor: pointer;
         }
+        /* Credits section styling */
+        .credits {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 200px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +112,10 @@
         </div>
     </div>
 
-    <!-- JavaScript for NASA APOD Background Image -->
+    <!-- Credits Section -->
+    <div class="credits" id="credits"></div>
+
+    <!-- JavaScript for NASA APOD Background Image and Credits -->
     <script>
         async function fetchAPODImage() {
             const apiKey = 'DufkqmIAgLw8tYyHKSUAKghFWRqCVdghqr66vgaL'; // Replace with your actual NASA API key
@@ -109,6 +125,9 @@
                 if (data.media_type === 'image') {
                     // Set the background image if the APOD is an image
                     document.body.style.backgroundImage = `url('${data.url}')`;
+                    // Display credits
+                    const creditsDiv = document.getElementById("credits");
+                    creditsDiv.innerHTML = `<strong>${data.title}</strong><br>${data.copyright || "Public Domain"}`;
                 } else {
                     console.error("NASA APOD is not an image today.");
                 }
